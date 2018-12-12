@@ -1,11 +1,15 @@
 pipeline {
   agent any
   stages {
+    stage('Checkout') {
+            steps {
+                dir('cicd-pipeline-gradle') {
+                    git credentialsId: 'GITHUB', url: 'git@github.com:Anish0210/cicd-pipeline-gradle.git'
+                }
+            }
+        }
       
     stage ('Build') {
-      
-        git url: 'https://github.com/jfrogdev/project-examples.git'
-    
       steps {
         echo 'Running Build Automation '
         sh './gradlew build --no-daemon'
