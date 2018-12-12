@@ -1,9 +1,8 @@
 pipeline {
   agent any
   stages {
-    stage('Clone sources') {
-        git url: 'https://github.com/jfrogdev/project-examples.git'
-    }
+    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
+              userRemoteConfigs: [[credentialsId: 'GITHUB', url: 'https://github.com/Anish0210/cicd-pipeline-gradle']]])
     stage ('Build') {
       steps {
         echo 'Running Build Automation '
